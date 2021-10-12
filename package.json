@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Jedlik project template for using TypeScript, Jest and Node.js in VS Code.",
     "engines": {
-        "node": "14.x"
+        "node": "14.A"
     },
     "main": "App.js",
     "repository": {
@@ -21,7 +21,7 @@
         "dev": "ts-node-dev --respawn --transpile-only src/App.ts",
         "dev-nm": "nodemon"
     },
-    "author": "Nits László",
+    "author": "Magashegyi Ádám, Rozs Norbert",
     "license": "MIT",
     "dependencies": {
         "tslib": "^2.3.1"
