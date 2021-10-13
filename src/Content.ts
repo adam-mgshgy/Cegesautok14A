@@ -34,6 +34,7 @@ export default class Content {
         // Tetszőleges html teg-ek és attribútumok beépítése:
         res.write("<span style='color: blue;'><i>Színes és dőlt Hello World!'</i></span>\n");
 
+        
         // Próbáljuk számra konvertálni a "kor" paraméter (http://localhost:8080/?kor=16) értékét:
         let korod = parseInt(params.get("kor") as string);
         // Ha nincs "kor" paraméter megadva, vagy nem lehet számra konvertálni értékét,
