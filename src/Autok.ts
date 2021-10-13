@@ -17,13 +17,14 @@ export default class Autok {
         this.#kiBeHajtas = parseInt(this.autok[5]);
     }
 
-    public get utolsoAuto() {
-        const index = 0;
-        for (let i = 0; i < this.autok.length; i++) {
-            if (this.#kiBeHajtas == 1) {
-            }
-        }
+    public get Nap() {
+        return this.#nap;
+    }
 
-        return 0;
+    public get Rendszám() {
+        return this.#rendszam;
+    }
+    public get KiBeHajtás() {
+        return this.#kiBeHajtas;
     }
 }
