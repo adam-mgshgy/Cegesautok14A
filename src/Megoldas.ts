@@ -20,6 +20,8 @@ export default class Megoldas {
                 rendszam = auto.Rendszám;
             }
         }
+        return `${maxNap}. nap, rendszám ${rendszam}`;
+
     }
     constructor(forras: string) {
         fs.readFileSync(forras)
