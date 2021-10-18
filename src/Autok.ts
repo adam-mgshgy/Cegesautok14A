@@ -27,4 +27,7 @@ export default class Autok {
     public get KiBeHajtás() {
         return this.#kiBeHajtas;
     }
+    public get OraPerc() {
+        return this.#oraPerc;
+    }
 }
