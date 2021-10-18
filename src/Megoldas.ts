@@ -6,6 +6,7 @@ import { __values } from "tslib";
 export default class Megoldas {
     autok: Autok[] = [];
 
+
     public get Autoszamolas() {
         let autokszama = 0;
         const autokrendszammal: { [rendszam: string]: number } = {};
@@ -18,6 +19,26 @@ export default class Megoldas {
             }
         }
         return autokszama;
+    }
+
+
+    public get UtolsoAuto() {
+        let maxNap = 0;
+        let rendszam = "";
+        for (const auto of this.autok) {
+            if (auto.Nap > maxNap && auto.KiBeHajtás == 0) {
+                maxNap = auto.Nap;
+            }
+        }
+        let maxIdo = 0;
+        for (const auto of this.autok) {
+            if (parseInt(auto.OraPerc) > maxIdo && auto.KiBeHajtás == 0) {
+                maxIdo = parseInt(auto.OraPerc);
+                rendszam = auto.Rendszám;
+            }
+        }
+        return `${maxNap}. nap, rendszám ${rendszam}`;
+
     }
 
     constructor(forras: string) {
