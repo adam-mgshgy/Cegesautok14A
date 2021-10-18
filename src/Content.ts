@@ -29,7 +29,11 @@ export default class Content {
 
         const megoldas: Megoldas = new Megoldas("autok.txt");
 
+
+        res.write(`4. feladat: A hónap végén ${megoldas.Autoszamolas} autót nem hoztak vissza!\n`);
+
         res.write(`2. feladat:${megoldas.UtolsoAuto} \n`);
+
 
         let nap = parseInt(params.get("nap") as string);
         res.write(`<label>3. feladat:\n Nap: <input type='number' name='nap' value=${nap} style='max-width:100px;' onChange='this.form.submit();'></label>\n`);
@@ -37,6 +41,7 @@ export default class Content {
         for (const item of megoldas.Forgalom(nap)) {
             res.write(item.split(`;`)[0] + " " + item.split(`;`)[1] + " " + item.split(`;`)[2] + " " + item.split(`;`)[3] + `\n`);
         }
+
 
         /*res.write("Egyszerű Hello World! (2021/2022)\n");
 
