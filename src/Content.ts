@@ -29,7 +29,11 @@ export default class Content {
 
         const megoldas: Megoldas = new Megoldas("autok.txt");
 
+
+        res.write(`4. feladat: A hónap végén ${megoldas.Autoszamolas} autót nem hoztak vissza!\n`);
+
         res.write(`2. feladat:${megoldas.UtolsoAuto} \n`);
+
         /*res.write("Egyszerű Hello World! (2021/2022)\n");
 
         // Tetszőleges html teg-ek és attribútumok beépítése:
