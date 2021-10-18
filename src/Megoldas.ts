@@ -3,11 +3,18 @@ import fs from "fs";
 import { Direction } from "readline";
 import { INSPECT_MAX_BYTES } from "buffer";
 import { __values } from "tslib";
-
+import { inspect } from "util";
 
 export default class Megoldas {
     autok: Autok[] = [];
 
+    public get Legtobbkilometer() {
+        interface SzemelyKilometerNaponta {
+            [id: number]: number;
+        }
+
+        return ``;
+    }
 
     public get Autoszamolas() {
         let autokszama = 0;
@@ -22,7 +29,6 @@ export default class Megoldas {
         }
         return autokszama;
     }
-
 
     public get UtolsoAuto() {
         let maxNap = 0;
@@ -61,7 +67,12 @@ export default class Megoldas {
             .split("\n")
             .forEach(i => {
                 const aktSor: string = i.trim();
-                this.autok.push(new Autok(aktSor));
+                const autok = new Autok(aktSor);
+
+                if (autok.KiBeHajtás == 1) {
+                    autok.kmElözőÁllás(autok.kmSzamlalo);
+                }
+                this.autok.push(autok);
             });
     }
 }
