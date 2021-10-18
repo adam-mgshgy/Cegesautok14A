@@ -30,4 +30,7 @@ export default class Autok {
     public get OraPerc() {
         return this.#oraPerc;
     }
+    public get SzemelyAzon() {
+        return this.#szemelyAzon;
+    }
 }

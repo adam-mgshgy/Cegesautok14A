@@ -1,6 +1,7 @@
 import Autok from "./Autok";
 import fs from "fs";
 import { Direction } from "readline";
+import { INSPECT_MAX_BYTES } from "buffer";
 
 export default class Megoldas {
     autok: Autok[] = [];
@@ -21,7 +22,19 @@ export default class Megoldas {
             }
         }
         return `${maxNap}. nap, rendszám ${rendszam}`;
-
+    }
+    autokForgalom: string[] = [];
+    public Forgalom(nap: number) {
+        for (const item of this.autok) {
+            if (item.Nap == nap) {
+                if (item.KiBeHajtás == 1) {
+                    this.autokForgalom.push(item.OraPerc + ";" + item.Rendszám + ";" + item.SzemelyAzon + ";" + "Be");
+                } else {
+                    this.autokForgalom.push(item.OraPerc + ";" + item.Rendszám + ";" + item.SzemelyAzon + ";" + "Ki");
+                }
+            }
+        }
+        return this.autokForgalom;
     }
     constructor(forras: string) {
         fs.readFileSync(forras)
