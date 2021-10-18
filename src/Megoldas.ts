@@ -9,11 +9,35 @@ export default class Megoldas {
     autok: Autok[] = [];
 
     public get Legtobbkilometer() {
-        interface SzemelyKilometerNaponta {
-            [id: number]: number;
+        
+
+        const rendezettautok: Autok[] = this.autok;
+
+        var item;
+        for (let index = 0; index < this.autok.length - 1; index++) {
+            for (let j = 0; j < this.autok.length - 1; j++) {
+                if(rendezettautok[j].Rendszám > rendezettautok[j+1].Rendszám)
+                {
+                    item = rendezettautok[j + 1];
+                    rendezettautok[j + 1] = rendezettautok[j];
+                    rendezettautok[j] = item;
+                }
+            }
+        }
+        var max = 0;
+        var szemely = 0;
+        for (let index = 1; index < rendezettautok.length; index++) {
+            if (rendezettautok[index].Rendszám == rendezettautok[index - 1].Rendszám && rendezettautok[index].KiBeHajtás == 1) {
+                if(max < rendezettautok[index].kmSzamlalo - rendezettautok[index - 1].kmSzamlalo )
+                {
+                    max = rendezettautok[index].kmSzamlalo - rendezettautok[index - 1].kmSzamlalo;
+                    szemely = rendezettautok[index].SzemelyAzon;
+                }
+            }
+            
         }
 
-        return ``;
+        return `Leghosszabb út: ${max} km, személy: ${szemely}`;
     }
 
     public get Autoszamolas() {
