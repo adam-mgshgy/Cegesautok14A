@@ -29,6 +29,7 @@ export default class Content {
 
         const megoldas: Megoldas = new Megoldas("autok.txt");
 
+        res.write(`2. feladat:${megoldas.UtolsoAuto} \n`);
         /*res.write("Egyszerű Hello World! (2021/2022)\n");
 
         // Tetszőleges html teg-ek és attribútumok beépítése:
