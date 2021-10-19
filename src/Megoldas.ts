@@ -85,6 +85,24 @@ export default class Megoldas {
         return this.autokForgalom;
     }
 
+    public FajlbaIras(fileName: string, rendszam: string): void {
+        let adatsor = "";
+        for (const auto of this.autok) {
+            if (auto.Rendszám == rendszam) {
+                if (auto.KiBeHajtás == 0) {
+                    adatsor += auto.SzemelyAzon + "\t" + auto.Nap + ".\t" + auto.OraPerc + "\t \t" + auto.kmSzamlalo + " km";
+                } else if (auto.KiBeHajtás == 1) {
+                    adatsor += "\t \t" + auto.Nap + ".\t" + auto.OraPerc + "\t \t" + auto.kmSzamlalo + " km\n";
+                }
+            }
+        }
+        try {
+            fs.writeFileSync(fileName, adatsor);
+        } catch (error) {
+            console.log((error as Error).message);
+        }
+    }
+
     constructor(forras: string) {
         fs.readFileSync(forras)
             .toString()
