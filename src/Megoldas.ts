@@ -3,10 +3,11 @@ import fs from "fs";
 import { Direction } from "readline";
 import { INSPECT_MAX_BYTES } from "buffer";
 import { __values } from "tslib";
-import { inspect } from "util";
 
 export default class Megoldas {
     autok: Autok[] = [];
+
+
 
     public get Legtobbkilometer() {
         const rendezettautok: Autok[] = this.autok;
@@ -34,6 +35,7 @@ export default class Megoldas {
 
         return `Leghosszabb út: ${max} km, személy: ${szemely}`;
     }
+
 
     public get Autoszamolas() {
         let autokszama = 0;
@@ -78,6 +80,25 @@ export default class Megoldas {
             }
         }
         return this.autokForgalom;
+    }
+    autokTomb: string[] = [];
+    public get Statisztika() {
+        const autokTavolsag: { rendszam: string; km: number }[] = [];
+        for (const item of this.autok) {
+            for (let index = 0; index < autokTavolsag.length; index++) {
+                if (!autokTavolsag[index].rendszam.includes(item.Rendszám)) {
+                    autokTavolsag.push({
+                        rendszam: item.Rendszám,
+                        km: item.kmSzamlalo,
+                    });
+                    console.log(autokTavolsag[index].km);
+                } else {
+                    autokTavolsag[index].km = autokTavolsag[index].km + item.kmSzamlalo;
+                    console.log(autokTavolsag[index].km);
+                }
+            }
+        }
+        return autokTavolsag;
     }
 
     public FajlbaIras(fileName: string, rendszam: string): void {
