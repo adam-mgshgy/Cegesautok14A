@@ -15,10 +15,23 @@ export default class Autok {
         this.#szemelyAzon = parseInt(this.autok[3]);
         this.#kmSzamlalo = parseInt(this.autok[4]);
         this.#kiBeHajtas = parseInt(this.autok[5]);
+        this.#kmElozoAllas = 0;
+    }
+
+    #kmElozoAllas: number;
+    public kmElözőÁllás(value: number) {
+        if (value > this.#kmElozoAllas) {
+        } else {
+            this.#kmElozoAllas = value;
+        }
     }
 
     public get Nap() {
         return this.#nap;
+    }
+
+    public get megtettKm() {
+        return this.#kmSzamlalo - this.#kmElozoAllas;
     }
 
     public get Rendszám() {
