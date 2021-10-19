@@ -85,9 +85,9 @@ export default class Megoldas {
         for (const auto of this.autok) {
             if (auto.Rendszám == rendszam) {
                 if (auto.KiBeHajtás == 0) {
-                    adatsor += auto.SzemelyAzon + "\t" + auto.Nap + ".\t" + auto.OraPerc + "\t \t" + auto.kmSzamlalo + " km";
+                    adatsor += auto.SzemelyAzon + "\t" + auto.Nap + ". " + auto.OraPerc + "\t" + auto.kmSzamlalo + " km";
                 } else if (auto.KiBeHajtás == 1) {
-                    adatsor += "\t \t" + auto.Nap + ".\t" + auto.OraPerc + "\t \t" + auto.kmSzamlalo + " km\n";
+                    adatsor += "\t" + auto.Nap + ". " + auto.OraPerc + "\t" + auto.kmSzamlalo + " km\n";
                 }
             }
         }
