@@ -4,6 +4,7 @@ import { Direction } from "readline";
 import { INSPECT_MAX_BYTES } from "buffer";
 import { __values } from "tslib";
 import { inspect } from "util";
+import { stringify } from "querystring";
 
 export default class Megoldas {
     autok: Autok[] = [];
@@ -47,6 +48,46 @@ export default class Megoldas {
             }
         }
         return autokszama;
+    }
+
+    public Statisztika() {
+        const autokrendszammal: { [rendszam: string]: number } = {};
+        for (const auto of this.autok) {
+            if (auto.Rendszám != undefined) {
+                autokrendszammal[auto.Rendszám] = 0;
+            }
+        }
+        const nemhozottvissza: string[] = [];
+        const ellenorzott: string[] = [];
+        const forditott: Autok[] = this.autok;
+        for (const auto of forditott.reverse()) {
+            if (!ellenorzott.includes(auto.Rendszám)) {
+                if (auto.KiBeHajtás == 0) {
+                    nemhozottvissza.push(`${auto.Rendszám}`);
+                } else {
+                    ellenorzott.push(auto.Rendszám);
+                }
+            }
+        }
+        for (const auto of forditott) {
+            if (nemhozottvissza.includes(auto.Rendszám)) {
+                delete nemhozottvissza[nemhozottvissza.indexOf(auto.Rendszám)];
+            } else {
+                if (auto.KiBeHajtás == 0) {
+                    autokrendszammal[auto.Rendszám] += auto.kmSzamlalo;
+                } else {
+                    autokrendszammal[auto.Rendszám] -= auto.kmSzamlalo;
+                }
+            }
+        }
+        console.log(autokrendszammal);
+        for (const item in autokrendszammal) {
+            if (item == undefined) {
+                delete nemhozottvissza[nemhozottvissza.indexOf(item)];
+            }
+            autokrendszammal[item] *= -1;
+        }
+        return autokrendszammal;
     }
 
     public get UtolsoAuto() {
