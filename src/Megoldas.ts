@@ -3,6 +3,7 @@ import fs from "fs";
 import { Direction } from "readline";
 import { INSPECT_MAX_BYTES } from "buffer";
 import { __values } from "tslib";
+
 import { inspect } from "util";
 import { stringify } from "querystring";
 
@@ -120,15 +121,34 @@ export default class Megoldas {
         }
         return this.autokForgalom;
     }
+    autokTomb: string[] = [];
+    public get Statisztika() {
+        const autokTavolsag: { rendszam: string; km: number }[] = [];
+        for (const item of this.autok) {
+            for (let index = 0; index < autokTavolsag.length; index++) {
+                if (!autokTavolsag[index].rendszam.includes(item.Rendszám)) {
+                    autokTavolsag.push({
+                        rendszam: item.Rendszám,
+                        km: item.kmSzamlalo,
+                    });
+                    console.log(autokTavolsag[index].km);
+                } else {
+                    autokTavolsag[index].km = autokTavolsag[index].km + item.kmSzamlalo;
+                    console.log(autokTavolsag[index].km);
+                }
+            }
+        }
+        return autokTavolsag;
+    }
 
     public FajlbaIras(fileName: string, rendszam: string): void {
         let adatsor = "";
         for (const auto of this.autok) {
             if (auto.Rendszám == rendszam) {
                 if (auto.KiBeHajtás == 0) {
-                    adatsor += auto.SzemelyAzon + "\t" + auto.Nap + ".\t" + auto.OraPerc + "\t \t" + auto.kmSzamlalo + " km";
+                    adatsor += auto.SzemelyAzon + "\t" + auto.Nap + ". " + auto.OraPerc + "\t" + auto.kmSzamlalo + " km";
                 } else if (auto.KiBeHajtás == 1) {
-                    adatsor += "\t \t" + auto.Nap + ".\t" + auto.OraPerc + "\t \t" + auto.kmSzamlalo + " km\n";
+                    adatsor += "\t" + auto.Nap + ". " + auto.OraPerc + "\t" + auto.kmSzamlalo + " km\n";
                 }
             }
         }
@@ -147,9 +167,6 @@ export default class Megoldas {
                 const aktSor: string = i.trim();
                 const autok = new Autok(aktSor);
 
-                if (autok.KiBeHajtás == 1) {
-                    autok.kmElözőÁllás(autok.kmSzamlalo);
-                }
                 this.autok.push(autok);
             });
     }
