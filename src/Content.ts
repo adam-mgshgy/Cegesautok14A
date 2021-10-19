@@ -29,7 +29,6 @@ export default class Content {
 
         const megoldas: Megoldas = new Megoldas("autok.txt");
 
-
         res.write(`2. feladat:${megoldas.UtolsoAuto} \n`);
 
         const nap = parseInt(params.get("nap") as string);
@@ -44,7 +43,6 @@ export default class Content {
             res.write(adat.rendszam + " " + adat.km + `\n`);
         }
 
-
         res.write(`4. feladat: A hónap végén ${megoldas.Autoszamolas} autót nem hoztak vissza!\n`);
 
         res.write(`6. feladat: ${megoldas.Legtobbkilometer} \n`);
@@ -52,7 +50,6 @@ export default class Content {
         const rendszam = params.get("rendszam") as string;
         res.write(`<label>7. feladat: Rendszám: <input type='text' name='rendszam' value=${rendszam} style='max-width:100px;' onChange='this.form.submit();'></label>\n`);
         megoldas.FajlbaIras(rendszam + "_menetlevel.txt", rendszam);
-
 
         /*res.write("Egyszerű Hello World! (2021/2022)\n");
 

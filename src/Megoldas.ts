@@ -7,8 +7,6 @@ import { __values } from "tslib";
 export default class Megoldas {
     autok: Autok[] = [];
 
-
-
     public get Legtobbkilometer() {
         const rendezettautok: Autok[] = this.autok;
 
@@ -35,7 +33,6 @@ export default class Megoldas {
 
         return `Leghosszabb út: ${max} km, személy: ${szemely}`;
     }
-
 
     public get Autoszamolas() {
         let autokszama = 0;
@@ -127,9 +124,6 @@ export default class Megoldas {
                 const aktSor: string = i.trim();
                 const autok = new Autok(aktSor);
 
-                if (autok.KiBeHajtás == 1) {
-                    autok.kmElözőÁllás(autok.kmSzamlalo);
-                }
                 this.autok.push(autok);
             });
     }
