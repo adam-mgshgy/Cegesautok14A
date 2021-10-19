@@ -19,7 +19,7 @@ export default class Content {
         res.write("<meta charset='utf-8'>");
         res.write("<style>input, pre {font-family:monospace; font-size:1em; font-weight:bold;}</style>");
         res.write("<meta name='viewport' content='width=device-width, initial-scale=1.0'>");
-        res.write("<title>Jedlik Ts Template</title>");
+        res.write("<title>Céges autók</title>");
         res.write("</head>");
         res.write("<body><form><pre>");
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -38,16 +38,11 @@ export default class Content {
             res.write(item.split(`;`)[0] + " " + item.split(`;`)[1] + " " + item.split(`;`)[2] + " " + item.split(`;`)[3] + `\n`);
         }
 
-        res.write(`5. feladat\n`);
-        for (const adat of megoldas.Statisztika) {
-            res.write(adat.rendszam + " " + adat.km + `\n`);
-        }
-
         res.write(`4. feladat: A hónap végén ${megoldas.Autoszamolas} autót nem hoztak vissza!\n`);
-
-        res.write(`5. feladat:`);
-        for (const item in megoldas.Statisztika()) {
-            res.write(`${item} km \n`);
+        res.write(`5. feladat:\n`);
+        const tomb = megoldas.Stat;
+        for (const item of tomb) {
+            res.write(item.split(";")[0] + " " + item.split(";")[1] + " km" + "\n");
         }
 
         res.write(`6. feladat: ${megoldas.Legtobbkilometer} \n`);
