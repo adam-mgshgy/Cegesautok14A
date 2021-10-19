@@ -122,23 +122,29 @@ export default class Megoldas {
         return this.autokForgalom;
     }
     autokTomb: string[] = [];
-    public get Statisztika() {
-        const autokTavolsag: { rendszam: string; km: number }[] = [];
+    public get Stat() {
+        const autokKmRndsz: string[] = [];
+        const autokKmSzam: number[] = [];
+        let maxIndex = 0;
+        let minIndex = 0;
+        let index = -1;
+        this.autok.sort((a, b) => (a.Rendszám > b.Rendszám ? 1 : -1));
         for (const item of this.autok) {
-            for (let index = 0; index < autokTavolsag.length; index++) {
-                if (!autokTavolsag[index].rendszam.includes(item.Rendszám)) {
-                    autokTavolsag.push({
-                        rendszam: item.Rendszám,
-                        km: item.kmSzamlalo,
-                    });
-                    console.log(autokTavolsag[index].km);
-                } else {
-                    autokTavolsag[index].km = autokTavolsag[index].km + item.kmSzamlalo;
-                    console.log(autokTavolsag[index].km);
-                }
+            if (!autokKmRndsz.includes(item.Rendszám)) {
+                autokKmRndsz.push(item.Rendszám);
+                minIndex = item.kmSzamlalo;
+                index++;
+            } else {
+                maxIndex = item.kmSzamlalo;
+            }
+            if (index > -1 && maxIndex != 0 && minIndex != 0) {
+                autokKmSzam[index] = (maxIndex - minIndex) * -1;
             }
         }
-        return autokTavolsag;
+        for (let i = 1; i < autokKmRndsz.length; i++) {
+            this.autokTomb.push(autokKmRndsz[i] + ";" + autokKmSzam[i]);
+        }
+        return this.autokTomb;
     }
 
     public FajlbaIras(fileName: string, rendszam: string): void {
