@@ -4,10 +4,8 @@ import { Direction } from "readline";
 import { INSPECT_MAX_BYTES } from "buffer";
 import { __values } from "tslib";
 
-
 export default class Megoldas {
     autok: Autok[] = [];
-
 
     public get Autoszamolas() {
         let autokszama = 0;
@@ -22,7 +20,6 @@ export default class Megoldas {
         }
         return autokszama;
     }
-
 
     public get UtolsoAuto() {
         let maxNap = 0;
@@ -53,6 +50,25 @@ export default class Megoldas {
             }
         }
         return this.autokForgalom;
+    }
+    autokTomb: string[] = [];
+    public get Statisztika() {
+        const autokTavolsag: { rendszam: string; km: number }[] = [];
+        for (const item of this.autok) {
+            for (let index = 0; index < autokTavolsag.length; index++) {
+                if (!autokTavolsag[index].rendszam.includes(item.Rendszám)) {
+                    autokTavolsag.push({
+                        rendszam: item.Rendszám,
+                        km: item.kmSzamlalo,
+                    });
+                    console.log(autokTavolsag[index].km);
+                } else {
+                    autokTavolsag[index].km = autokTavolsag[index].km + item.kmSzamlalo;
+                    console.log(autokTavolsag[index].km);
+                }
+            }
+        }
+        return autokTavolsag;
     }
 
     constructor(forras: string) {

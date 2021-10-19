@@ -33,4 +33,7 @@ export default class Autok {
     public get SzemelyAzon() {
         return this.#szemelyAzon;
     }
+    public get kmSzamlalo() {
+        return this.#kmSzamlalo;
+    }
 }
