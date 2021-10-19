@@ -45,6 +45,11 @@ export default class Content {
 
         res.write(`4. feladat: A hónap végén ${megoldas.Autoszamolas} autót nem hoztak vissza!\n`);
 
+        res.write(`5. feladat:`);
+        for (const item in megoldas.Statisztika()) {
+            res.write(`${item} km \n`);
+        }
+
         res.write(`6. feladat: ${megoldas.Legtobbkilometer} \n`);
 
         const rendszam = params.get("rendszam") as string;
