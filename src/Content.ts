@@ -31,7 +31,8 @@ export default class Content {
 
         res.write(`2. feladat:${megoldas.utolsoAuto} \n`);
 
-        const nap = parseInt(params.get("nap") as string);
+        let nap = parseInt(params.get("nap") as string);
+        if (isNaN(nap)) nap = 4;
         res.write(`<label>3. feladat:\n Nap: <input type='number' name='nap' value=${nap} style='max-width:100px;' onChange='this.form.submit();'></label>\n`);
         res.write(`Forgalom a ${nap}. napon\n`);
         for (const item of megoldas.forgalom(nap)) {
@@ -47,9 +48,12 @@ export default class Content {
 
         res.write(`6. feladat: ${megoldas.legtobbkilometer} \n`);
 
-        const rendszam = params.get("rendszam") as string;
+        let rendszam = params.get("rendszam") as string;
+        if (rendszam == null) rendszam = "CEG304";
         res.write(`<label>7. feladat: Rendszám: <input type='text' name='rendszam' value=${rendszam} style='max-width:100px;' onChange='this.form.submit();'></label>\n`);
-        megoldas.fajlbaIras(rendszam + "_menetlevel.txt", rendszam);
+        if (megoldas.fajlbaIras(rendszam + "_menetlevel.txt", rendszam)) {
+            res.write(`Menetlevél kész!`);
+        }
 
         /*res.write("Egyszerű Hello World! (2021/2022)\n");
 
