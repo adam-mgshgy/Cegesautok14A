@@ -92,7 +92,7 @@ export default class Megoldas {
         return this.autokTomb;
     }
 
-    public fajlbaIras(fileName: string, rendszam: string): void {
+    public fajlbaIras(fileName: string, rendszam: string): boolean {
         let adatsor = "";
         for (const auto of this.autok) {
             if (auto.rendszam == rendszam) {
@@ -107,7 +107,9 @@ export default class Megoldas {
             fs.writeFileSync(fileName, adatsor);
         } catch (error) {
             console.log((error as Error).message);
+            return false;
         }
+        return true;
     }
 
     constructor(forras: string) {
