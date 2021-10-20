@@ -1,7 +1,7 @@
 {
-    "name": "jedlik-typescript-vscode-template",
+    "name": "ceges-autok-14a",
     "version": "1.0.0",
-    "description": "Jedlik project template for using TypeScript, Jest and Node.js in VS Code.",
+    "description": "Céges autók 14A, 2019 május informatika emelt érettségi feladat megoldása.",
     "engines": {
         "node": "14.x"
     },
