@@ -4,6 +4,7 @@ import fs from "fs";
 describe("Megoldas osztály unit tesztje", () => {
     const megoldas: Megoldas = new Megoldas("autok.txt");
     const autokForgalom: string[] = ["12:50;CEG303;561;Ki", "19:17;CEG308;552;Be"];
+    const autokStatisztika: string[] = ["CEG300;6751", "CEG301;5441", "CEG302;5101", "CEG303;7465", "CEG304;6564", "CEG305;5232", "CEG306;7165", "CEG307;6489", "CEG308;6745", "CEG309;1252"];
 
     it("Megoldas osztálypéldány ellenörzése", async () => {
         expect(megoldas).toBeInstanceOf(Megoldas);
@@ -19,6 +20,10 @@ describe("Megoldas osztály unit tesztje", () => {
 
     it("Nem visszahozott autók", async () => {
         expect(megoldas.Autoszamolas).toBe(4);
+    });
+
+    it("Statisztika", async () => {
+        expect(megoldas.Stat).toStrictEqual(autokStatisztika);
     });
 
     it("Legtöbb kilométert tett meg", async () => {
