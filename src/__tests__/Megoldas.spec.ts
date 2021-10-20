@@ -11,27 +11,27 @@ describe("Megoldas osztály unit tesztje", () => {
     });
 
     it("Autók száma", async () => {
-        expect(megoldas.UtolsoAuto).toBe("30. nap, rendszám CEG300");
+        expect(megoldas.utolsoAuto).toBe("30. nap, rendszám CEG300");
     });
 
     it("Forgalom", async () => {
-        expect(megoldas.Forgalom(4)).toStrictEqual(autokForgalom);
+        expect(megoldas.forgalom(4)).toStrictEqual(autokForgalom);
     });
 
     it("Nem visszahozott autók", async () => {
-        expect(megoldas.Autoszamolas).toBe(4);
+        expect(megoldas.autoszamolas).toBe(4);
     });
 
     it("Statisztika", async () => {
-        expect(megoldas.Stat).toStrictEqual(autokStatisztika);
+        expect(megoldas.stat).toStrictEqual(autokStatisztika);
     });
 
     it("Legtöbb kilométert tett meg", async () => {
-        expect(megoldas.Legtobbkilometer).toBe("Leghosszabb út: 1551 km, személy: 506");
+        expect(megoldas.legtobbkilometer).toBe("Leghosszabb út: 1551 km, személy: 506");
     });
 
     it("Menetlevél állomány összehasonlitás", async () => {
-        megoldas.FajlbaIras("CEG304_menetlevel.txt", "CEG304");
+        megoldas.fajlbaIras("CEG304_menetlevel.txt", "CEG304");
         expect(fs.readFileSync("CEG304_menetlevelTest.txt").toString()).toBe(fs.readFileSync("CEG304_menetlevel.txt").toString());
     });
 });
