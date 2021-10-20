@@ -17,20 +17,20 @@ export default class Autok {
         this.#kiBeHajtas = parseInt(this.autok[5]);
     }
 
-    public get Nap() {
+    public get nap() {
         return this.#nap;
     }
 
-    public get Rendszám() {
+    public get rendszam() {
         return this.#rendszam;
     }
-    public get KiBeHajtás() {
+    public get kiBeHajtás() {
         return this.#kiBeHajtas;
     }
-    public get OraPerc() {
+    public get oraPerc() {
         return this.#oraPerc;
     }
-    public get SzemelyAzon() {
+    public get szemelyAzon() {
         return this.#szemelyAzon;
     }
     public get kmSzamlalo() {

@@ -1,26 +1,20 @@
 import Autok from "./Autok";
 import fs from "fs";
-import { Direction } from "readline";
-import { INSPECT_MAX_BYTES } from "buffer";
-import { __values } from "tslib";
-
-import { inspect } from "util";
-import { stringify } from "querystring";
 
 export default class Megoldas {
     autok: Autok[] = [];
 
-    public get Legtobbkilometer() {
+    public get legtobbkilometer() {
         let maxut = 0;
         let szemely = 0;
 
-        const rendezettautok: Autok[] = this.autok.sort((a, b) => (a.Rendszám > b.Rendszám ? 1 : -1));
+        const rendezettautok: Autok[] = this.autok.sort((a, b) => (a.rendszam > b.rendszam ? 1 : -1));
 
         for (let i = 1; i < rendezettautok.length; i++) {
-            if (rendezettautok[i].Rendszám == rendezettautok[i - 1].Rendszám && rendezettautok[i].KiBeHajtás == 1) {
+            if (rendezettautok[i].rendszam == rendezettautok[i - 1].rendszam && rendezettautok[i].kiBeHajtás == 1) {
                 if (maxut < rendezettautok[i].kmSzamlalo - rendezettautok[i - 1].kmSzamlalo) {
                     maxut = rendezettautok[i].kmSzamlalo - rendezettautok[i - 1].kmSzamlalo;
-                    szemely = rendezettautok[i].SzemelyAzon;
+                    szemely = rendezettautok[i].szemelyAzon;
                 }
             }
         }
@@ -28,11 +22,11 @@ export default class Megoldas {
         return `Leghosszabb út: ${maxut} km, személy: ${szemely}`;
     }
 
-    public get Autoszamolas() {
+    public get autoszamolas() {
         let autokszama = 0;
         const autokrendszammal: { [rendszam: string]: number } = {};
         for (let index = 0; index < this.autok.length; index++) {
-            autokrendszammal[this.autok[index].Rendszám] = this.autok[index].KiBeHajtás;
+            autokrendszammal[this.autok[index].rendszam] = this.autok[index].kiBeHajtás;
         }
         for (const value in autokrendszammal) {
             if (autokrendszammal[value] == 0) {
@@ -42,47 +36,47 @@ export default class Megoldas {
         return autokszama;
     }
 
-    public get UtolsoAuto() {
+    public get utolsoAuto() {
         let maxNap = 0;
         let rendszam = "";
         for (const auto of this.autok) {
-            if (auto.Nap > maxNap && auto.KiBeHajtás == 0) {
-                maxNap = auto.Nap;
+            if (auto.nap > maxNap && auto.kiBeHajtás == 0) {
+                maxNap = auto.nap;
             }
         }
         let maxIdo = 0;
         for (const auto of this.autok) {
-            if (parseInt(auto.OraPerc) > maxIdo && auto.KiBeHajtás == 0) {
-                maxIdo = parseInt(auto.OraPerc);
-                rendszam = auto.Rendszám;
+            if (parseInt(auto.oraPerc) > maxIdo && auto.kiBeHajtás == 0) {
+                maxIdo = parseInt(auto.oraPerc);
+                rendszam = auto.rendszam;
             }
         }
         return `${maxNap}. nap, rendszám ${rendszam}`;
     }
     autokForgalom: string[] = [];
-    public Forgalom(nap: number) {
+    public forgalom(nap: number) {
         for (const item of this.autok) {
-            if (item.Nap == nap) {
-                if (item.KiBeHajtás == 1) {
-                    this.autokForgalom.push(item.OraPerc + ";" + item.Rendszám + ";" + item.SzemelyAzon + ";" + "Be");
+            if (item.nap == nap) {
+                if (item.kiBeHajtás == 1) {
+                    this.autokForgalom.push(item.oraPerc + ";" + item.rendszam + ";" + item.szemelyAzon + ";" + "Be");
                 } else {
-                    this.autokForgalom.push(item.OraPerc + ";" + item.Rendszám + ";" + item.SzemelyAzon + ";" + "Ki");
+                    this.autokForgalom.push(item.oraPerc + ";" + item.rendszam + ";" + item.szemelyAzon + ";" + "Ki");
                 }
             }
         }
         return this.autokForgalom;
     }
     autokTomb: string[] = [];
-    public get Stat() {
+    public get stat() {
         const autokKmRndsz: string[] = [];
         const autokKmSzam: number[] = [];
         let maxIndex = 0;
         let minIndex = 0;
         let index = -1;
-        this.autok.sort((a, b) => (a.Rendszám > b.Rendszám ? 1 : -1));
+        this.autok.sort((a, b) => (a.rendszam > b.rendszam ? 1 : -1));
         for (const item of this.autok) {
-            if (!autokKmRndsz.includes(item.Rendszám)) {
-                autokKmRndsz.push(item.Rendszám);
+            if (!autokKmRndsz.includes(item.rendszam)) {
+                autokKmRndsz.push(item.rendszam);
                 minIndex = item.kmSzamlalo;
                 index++;
             } else {
@@ -98,14 +92,14 @@ export default class Megoldas {
         return this.autokTomb;
     }
 
-    public FajlbaIras(fileName: string, rendszam: string): void {
+    public fajlbaIras(fileName: string, rendszam: string): void {
         let adatsor = "";
         for (const auto of this.autok) {
-            if (auto.Rendszám == rendszam) {
-                if (auto.KiBeHajtás == 0) {
-                    adatsor += auto.SzemelyAzon + "\t" + auto.Nap + ". " + auto.OraPerc + "\t" + auto.kmSzamlalo + " km";
-                } else if (auto.KiBeHajtás == 1) {
-                    adatsor += "\t" + auto.Nap + ". " + auto.OraPerc + "\t" + auto.kmSzamlalo + " km\n";
+            if (auto.rendszam == rendszam) {
+                if (auto.kiBeHajtás == 0) {
+                    adatsor += auto.szemelyAzon + "\t" + auto.nap + ". " + auto.oraPerc + "\t" + auto.kmSzamlalo + " km";
+                } else if (auto.kiBeHajtás == 1) {
+                    adatsor += "\t" + auto.nap + ". " + auto.oraPerc + "\t" + auto.kmSzamlalo + " km\n";
                 }
             }
         }
