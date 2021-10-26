@@ -4,7 +4,7 @@ import fs from "fs";
 export default class Megoldas {
     autok: Autok[] = [];
 
-    public get legtobbkilometer() {
+    public get legtobbkilometer(): string {
         let maxut = 0;
         let szemely = 0;
 
@@ -22,7 +22,7 @@ export default class Megoldas {
         return `Leghosszabb út: ${maxut} km, személy: ${szemely}`;
     }
 
-    public get autoszamolas() {
+    public get autoszamolas(): number {
         let autokszama = 0;
         const autokrendszammal: { [rendszam: string]: number } = {};
         for (let index = 0; index < this.autok.length; index++) {
@@ -36,7 +36,7 @@ export default class Megoldas {
         return autokszama;
     }
 
-    public get utolsoAuto() {
+    public get utolsoAuto(): string {
         let maxNap = 0;
         let rendszam = "";
         for (const auto of this.autok) {
@@ -53,21 +53,27 @@ export default class Megoldas {
         }
         return `${maxNap}. nap, rendszám ${rendszam}`;
     }
-    autokForgalom: string[] = [];
-    public forgalom(nap: number) {
+
+    public forgalom(nap: number): string {
+        const autokForgalom: string[] = [];
         for (const item of this.autok) {
             if (item.nap == nap) {
                 if (item.kiBeHajtás == 1) {
-                    this.autokForgalom.push(item.oraPerc + ";" + item.rendszam + ";" + item.szemelyAzon + ";" + "Be");
+                    autokForgalom.push(item.oraPerc + ";" + item.rendszam + ";" + item.szemelyAzon + ";" + "Be");
                 } else {
-                    this.autokForgalom.push(item.oraPerc + ";" + item.rendszam + ";" + item.szemelyAzon + ";" + "Ki");
+                    autokForgalom.push(item.oraPerc + ";" + item.rendszam + ";" + item.szemelyAzon + ";" + "Ki");
                 }
             }
         }
-        return this.autokForgalom;
+        let autokString = "";
+        for (const item of autokForgalom) {
+            autokString += item.split(`;`)[0] + " " + item.split(`;`)[1] + " " + item.split(`;`)[2] + " " + item.split(`;`)[3] + `\n`;
+        }
+        return autokString;
     }
-    autokTomb: string[] = [];
-    public get stat() {
+
+    public get stat(): string {
+        const autokTomb: string[] = [];
         const autokKmRndsz: string[] = [];
         const autokKmSzam: number[] = [];
         let maxIndex = 0;
@@ -87,9 +93,13 @@ export default class Megoldas {
             }
         }
         for (let i = 1; i < autokKmRndsz.length; i++) {
-            this.autokTomb.push(autokKmRndsz[i] + ";" + autokKmSzam[i]);
+            autokTomb.push(autokKmRndsz[i] + ";" + autokKmSzam[i]);
         }
-        return this.autokTomb;
+        let autokString = "";
+        for (const item of autokTomb) {
+            autokString += item.split(";")[0] + " " + item.split(";")[1] + " km" + "\n";
+        }
+        return autokString;
     }
 
     public fajlbaIras(fileName: string, rendszam: string): boolean {
