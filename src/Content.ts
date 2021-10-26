@@ -35,17 +35,12 @@ export default class Content {
         if (isNaN(nap)) nap = 4;
         res.write(`<label>3. feladat:\n Nap: <input type='number' name='nap' value=${nap} style='max-width:100px;' onChange='this.form.submit();'></label>\n`);
         res.write(`Forgalom a ${nap}. napon\n`);
-        for (const item of megoldas.forgalom(nap)) {
-            res.write(item.split(`;`)[0] + " " + item.split(`;`)[1] + " " + item.split(`;`)[2] + " " + item.split(`;`)[3] + `\n`);
-        }
+
+        res.write(megoldas.forgalom(nap));
 
         res.write(`4. feladat: A hónap végén ${megoldas.autoszamolas} autót nem hoztak vissza!\n`);
         res.write(`5. feladat:\n`);
-        const tomb = megoldas.stat;
-        for (const item of tomb) {
-            res.write(item.split(";")[0] + " " + item.split(";")[1] + " km" + "\n");
-        }
-
+        res.write(megoldas.stat);
         res.write(`6. feladat: ${megoldas.legtobbkilometer} \n`);
 
         let rendszam = params.get("rendszam") as string;

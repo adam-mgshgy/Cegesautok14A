@@ -5,35 +5,34 @@ export default class Autok {
     #szemelyAzon: number;
     #kmSzamlalo: number;
     #kiBeHajtas: number;
-    autok: string[];
 
     constructor(sor: string) {
-        this.autok = sor.split(" ");
-        this.#nap = parseInt(this.autok[0]);
-        this.#oraPerc = this.autok[1];
-        this.#rendszam = this.autok[2];
-        this.#szemelyAzon = parseInt(this.autok[3]);
-        this.#kmSzamlalo = parseInt(this.autok[4]);
-        this.#kiBeHajtas = parseInt(this.autok[5]);
+        const autok = sor.split(" ");
+        this.#nap = parseInt(autok[0]);
+        this.#oraPerc = autok[1];
+        this.#rendszam = autok[2];
+        this.#szemelyAzon = parseInt(autok[3]);
+        this.#kmSzamlalo = parseInt(autok[4]);
+        this.#kiBeHajtas = parseInt(autok[5]);
     }
 
-    public get nap() {
+    public get nap(): number {
         return this.#nap;
     }
 
-    public get rendszam() {
+    public get rendszam(): string {
         return this.#rendszam;
     }
-    public get kiBeHajtás() {
+    public get kiBeHajtás(): number {
         return this.#kiBeHajtas;
     }
-    public get oraPerc() {
+    public get oraPerc(): string {
         return this.#oraPerc;
     }
-    public get szemelyAzon() {
+    public get szemelyAzon(): number {
         return this.#szemelyAzon;
     }
-    public get kmSzamlalo() {
+    public get kmSzamlalo(): number {
         return this.#kmSzamlalo;
     }
 }
