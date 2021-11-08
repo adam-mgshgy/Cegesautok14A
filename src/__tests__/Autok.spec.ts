@@ -1,5 +1,4 @@
 import Autok from "../Autok";
-import fs from "fs";
 
 describe("Megoldas osztály unit tesztje", () => {
     const autok: Autok = new Autok("1 08:45 CEG306 501 23989 0");
