@@ -4,7 +4,7 @@ import fs from "fs";
 export default class Megoldas {
     autok: Autok[] = [];
 
-    public get legtobbkilometer(): string {
+    public get legtobbKilometer(): string {
         let maxut = 0;
         let szemely = 0;
 
@@ -22,7 +22,7 @@ export default class Megoldas {
         return `Leghosszabb út: ${maxut} km, személy: ${szemely}`;
     }
 
-    public get autoszamolas(): number {
+    public get autoSzamolas(): number {
         let autokszama = 0;
         const autokrendszammal: { [rendszam: string]: number } = {};
         for (let index = 0; index < this.autok.length; index++) {
@@ -113,6 +113,7 @@ export default class Megoldas {
                 }
             }
         }
+        this._fajlkiiras = adatsor;
         try {
             fs.writeFileSync(fileName, adatsor);
         } catch (error) {
@@ -122,6 +123,11 @@ export default class Megoldas {
         return true;
     }
 
+    _fajlkiiras = "";
+    public fajlKiiras(): string {
+        return this._fajlkiiras;
+    }
+
     constructor(forras: string) {
         fs.readFileSync(forras)
             .toString()
@@ -129,7 +135,7 @@ export default class Megoldas {
             .forEach(i => {
                 const aktSor: string = i.trim();
                 const autok = new Autok(aktSor);
-
+                this._fajlkiiras += aktSor + "\n";
                 this.autok.push(autok);
             });
     }

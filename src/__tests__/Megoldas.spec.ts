@@ -3,8 +3,8 @@ import fs from "fs";
 
 describe("Megoldas osztály unit tesztje", () => {
     const megoldas: Megoldas = new Megoldas("autok.txt");
-    const autokForgalom: string[] = ["12:50;CEG303;561;Ki", "19:17;CEG308;552;Be"];
-    const autokStatisztika: string[] = ["CEG300;6751", "CEG301;5441", "CEG302;5101", "CEG303;7465", "CEG304;6564", "CEG305;5232", "CEG306;7165", "CEG307;6489", "CEG308;6745", "CEG309;1252"];
+    const autokForgalom = "12:50 CEG303 561 Ki\n19:17 CEG308 552 Be\n";
+    const autokStatisztika: string = "CEG300 6751 km" + "\n" + "CEG301 5441 km" + "\n" + "CEG302 5101 km" + "\n" + "CEG303 7465 km" + "\n" + "CEG304 6564 km" + "\n" + "CEG305 5232 km" + "\n" + "CEG306 7165 km" + "\n" + "CEG307 6489 km" + "\n" + "CEG308 6745 km" + "\n" + "CEG309 1252 km\n";
 
     it("Megoldas osztálypéldány ellenörzése", async () => {
         expect(megoldas).toBeInstanceOf(Megoldas);
@@ -15,11 +15,11 @@ describe("Megoldas osztály unit tesztje", () => {
     });
 
     it("Forgalom", async () => {
-        expect(megoldas.forgalom(4)).toStrictEqual(autokForgalom);
+        expect(megoldas.forgalom(4)).toBe(autokForgalom);
     });
 
     it("Nem visszahozott autók", async () => {
-        expect(megoldas.autoszamolas).toBe(4);
+        expect(megoldas.autoSzamolas).toBe(4);
     });
 
     it("Statisztika", async () => {
@@ -27,7 +27,7 @@ describe("Megoldas osztály unit tesztje", () => {
     });
 
     it("Legtöbb kilométert tett meg", async () => {
-        expect(megoldas.legtobbkilometer).toBe("Leghosszabb út: 1551 km, személy: 506");
+        expect(megoldas.legtobbKilometer).toBe("Leghosszabb út: 1551 km, személy: 506");
     });
 
     it("Menetlevél állomány összehasonlitás", async () => {
