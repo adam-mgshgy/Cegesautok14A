@@ -1,11 +1,3 @@
-// felesleges megjegyzések a Content.ts -ben
-// App.test.ts nincs törölve
-// Forrás és az elkészült menetlevél nem került ki a weboldalra (kértem)
-// Unit tesztek nem lettek frissítve az új megoldáshoz, így elbuknak (2db+1)
-// Autok.spec.ts warning: 'fs' is declared but its value is never read. ts(6133)
-// Camel-case nem mindig sikerült: "legtobbkilometer", "autoszamolas"
-// Autok osztály "szegényes" kódtagokban
-
 export default class Autok {
     #nap: number;
     #oraPerc: string;
